@@ -1,4 +1,4 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-java-ficheros,es.ies.puerto,EjemploFile,4,0,0,0,2,0,2,0,2,0
-java-ficheros,es.ies.puerto.model.fichero,FileOperations,41,202,2,10,17,41,5,11,3,7
-java-ficheros,es.ies.puerto.model,Empleado,87,43,8,0,21,12,11,6,7,6
+java-ficheros,es.ies.puerto,EjemploFile,140,0,0,0,27,0,2,0,2,0
+java-ficheros,es.ies.puerto.model.fichero,FileOperations,33,338,6,30,16,72,6,23,0,11
+java-ficheros,es.ies.puerto.model,Empleado,18,98,3,3,8,27,5,13,2,13

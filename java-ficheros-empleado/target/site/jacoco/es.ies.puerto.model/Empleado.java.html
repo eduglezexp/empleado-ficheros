@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Empleado.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java-ficheros</a> &gt; <a href="index.source.html" class="el_package">es.ies.puerto.model</a> &gt; <span class="el_source">Empleado.java</span></div><h1>Empleado.java</h1><pre class="source lang-java linenums">package es.ies.puerto.model;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
+
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
 
 public class Empleado {
     private String identificador;
@@ -11,60 +17,99 @@ public class Empleado {
     private String puesto;
     private double salario;
     private String fechaNacimiento;
+
+    /**
+     * Constructor por defecto
+     */
+<span class="nc" id="L24">    public Empleado() {</span>
+
+<span class="nc" id="L26">    }</span>
+
+    /**
+     * Constructor con la propiedad del identificador
+     * @param identificador
+     */
+<span class="nc" id="L32">    public Empleado(String identificador) {</span>
+<span class="nc" id="L33">        this.identificador = identificador;</span>
+<span class="nc" id="L34">    }</span>
+
+    /**
+     * Constructor con todas las propiedades
+     * @param identificador
+     * @param nombre
+     * @param puesto
+     * @param salario
+     * @param fechaNacimiento
+     */
+<span class="fc" id="L44">    public Empleado(String identificador, String nombre, String puesto, double salario, String fechaNacimiento) {</span>
+<span class="fc" id="L45">        this.identificador = identificador;</span>
+<span class="fc" id="L46">        this.nombre = nombre;</span>
+<span class="fc" id="L47">        this.puesto = puesto;</span>
+<span class="fc" id="L48">        this.salario = salario;</span>
+<span class="fc" id="L49">        this.fechaNacimiento = fechaNacimiento;</span>
+<span class="fc" id="L50">    }</span>
     
-<span class="fc" id="L15">    public Empleado(String identificador, String nombre, String puesto, double salario, String fechaNacimiento) {</span>
-<span class="fc" id="L16">        this.identificador = identificador;</span>
-<span class="fc" id="L17">        this.nombre = nombre;</span>
-<span class="fc" id="L18">        this.puesto = puesto;</span>
-<span class="fc" id="L19">        this.salario = salario;</span>
-<span class="fc" id="L20">        this.fechaNacimiento = fechaNacimiento;</span>
-<span class="fc" id="L21">    }</span>
+    /**
+     * Getters and Setters
+     */
+    public String getIdentificador() { 
+<span class="fc" id="L56">        return identificador; </span>
+    }
     
-<span class="fc" id="L23">    public String getIdentificador() { return identificador; }</span>
-<span class="fc" id="L24">    public String getNombre() { return nombre; }</span>
-<span class="nc" id="L25">    public String getPuesto() { return puesto; }</span>
-<span class="fc" id="L26">    public double getSalario() { return salario; }</span>
-<span class="nc" id="L27">    public String getFechaNacimiento() { return fechaNacimiento; }</span>
+    public String getNombre() {
+<span class="fc" id="L60">        return nombre; </span>
+    }
+    public String getPuesto() { 
+<span class="fc" id="L63">        return puesto; </span>
+    }
+
+    public double getSalario() { 
+<span class="fc" id="L67">        return salario; </span>
+    }
+
+    public String getFechaNacimiento() { 
+<span class="fc" id="L71">        return fechaNacimiento; </span>
+    }
     
-<span class="nc" id="L29">    public void setNombre(String nombre) { this.nombre = nombre; }</span>
-<span class="nc" id="L30">    public void setPuesto(String puesto) { this.puesto = puesto; }</span>
-<span class="fc" id="L31">    public void setSalario(double salario) { this.salario = salario; }</span>
+    public void setNombre(String nombre) { 
+<span class="fc" id="L75">        this.nombre = nombre; </span>
+<span class="fc" id="L76">    }</span>
+
+    public void setPuesto(String puesto) { 
+<span class="fc" id="L79">        this.puesto = puesto; </span>
+<span class="fc" id="L80">    }</span>
+
+    public void setSalario(double salario) { 
+<span class="fc" id="L83">        this.salario = salario; </span>
+<span class="fc" id="L84">    }</span>
     
     public int getEdad() {
         try {
-<span class="nc" id="L35">            SimpleDateFormat sdf = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
-<span class="nc" id="L36">            Date fechaNac = (Date) sdf.parse(fechaNacimiento);</span>
-<span class="nc" id="L37">            Calendar calNac = Calendar.getInstance();</span>
-<span class="nc" id="L38">            calNac.setTime(fechaNac);</span>
-            
-<span class="nc" id="L40">            Calendar calHoy = Calendar.getInstance();</span>
-<span class="nc" id="L41">            int edad = calHoy.get(Calendar.YEAR) - calNac.get(Calendar.YEAR);</span>
-<span class="nc bnc" id="L42" title="All 2 branches missed.">            if (calHoy.get(Calendar.DAY_OF_YEAR) &lt; calNac.get(Calendar.DAY_OF_YEAR)) {</span>
-<span class="nc" id="L43">                edad--;</span>
-            }
-<span class="nc" id="L45">            return edad;</span>
-<span class="nc" id="L46">        } catch (ParseException e) {</span>
-<span class="nc" id="L47">            e.printStackTrace();</span>
-<span class="nc" id="L48">            return -1;</span>
+<span class="fc" id="L88">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L89">        LocalDate fechaParse = LocalDate.parse(fechaNacimiento, formatter);</span>
+<span class="fc" id="L90">        return Period.between(fechaParse, LocalDate.now()).getYears();</span>
+<span class="nc" id="L91">        } catch (DateTimeParseException e) {</span>
+<span class="nc" id="L92">            e.printStackTrace();</span>
+<span class="nc" id="L93">            return -1;</span>
         }
     }
     
     @Override
     public String toString() {
-<span class="fc" id="L54">        return identificador + &quot;, &quot; + nombre + &quot;, &quot; + puesto + &quot;, &quot; + salario + &quot;, &quot; + fechaNacimiento;</span>
+<span class="fc" id="L99">        return identificador + &quot;, &quot; + nombre + &quot;, &quot; + puesto + &quot;, &quot; + salario + &quot;, &quot; + fechaNacimiento;</span>
     }
     
     @Override
     public boolean equals(Object obj) {
-<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (this == obj) return true;</span>
-<span class="nc bnc" id="L60" title="All 4 branches missed.">        if (obj == null || getClass() != obj.getClass()) return false;</span>
-<span class="nc" id="L61">        Empleado empleado = (Empleado) obj;</span>
-<span class="nc" id="L62">        return Objects.equals(identificador, empleado.identificador);</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        if (this == obj) return true;</span>
+<span class="pc bpc" id="L105" title="2 of 4 branches missed.">        if (obj == null || getClass() != obj.getClass()) return false;</span>
+<span class="fc" id="L106">        Empleado empleado = (Empleado) obj;</span>
+<span class="fc" id="L107">        return Objects.equals(identificador, empleado.identificador);</span>
     }
     
     @Override
     public int hashCode() {
-<span class="nc" id="L67">        return Objects.hash(identificador);</span>
+<span class="fc" id="L112">        return Objects.hash(identificador);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

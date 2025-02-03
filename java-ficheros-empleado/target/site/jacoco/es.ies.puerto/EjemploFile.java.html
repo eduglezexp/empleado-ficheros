@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EjemploFile.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java-ficheros</a> &gt; <a href="index.source.html" class="el_package">es.ies.puerto</a> &gt; <span class="el_source">EjemploFile.java</span></div><h1>EjemploFile.java</h1><pre class="source lang-java linenums">package es.ies.puerto;
 
+import java.util.Set;
 
-import java.io.File;
 import es.ies.puerto.model.Empleado;
+import es.ies.puerto.model.fichero.FileOperations;
 
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
 
-
-<span class="nc" id="L9">public class EjemploFile {</span>
-    
+<span class="nc" id="L13">public class EjemploFile {</span>
     public static void main(String[] args) {
+<span class="nc" id="L15">        FileOperations fileOperations = new FileOperations();</span>
+<span class="nc" id="L16">        Empleado empleado1 = new Empleado(&quot;01&quot;, &quot;Juan Perez&quot;, &quot;Desarrollador&quot;, 2000, &quot;06/09/2001&quot;);</span>
+<span class="nc" id="L17">        Empleado empleado2 = new Empleado(&quot;02&quot;, &quot;Maria Lopez&quot;, &quot;Diseniador&quot;, 1800, &quot;15/03/1995&quot;);</span>
+<span class="nc" id="L18">        Empleado empleado3 = new Empleado(&quot;03&quot;, &quot;Carlos Gomez&quot;, &quot;Desarrollador&quot;, 2200, &quot;21/07/1988&quot;);</span>
+<span class="nc" id="L19">        Empleado empleado4 = new Empleado(&quot;04&quot;, &quot;Laura Martinez&quot;, &quot;Gerente&quot;, 3000, &quot;10/12/1980&quot;);</span>
+<span class="nc" id="L20">        Empleado empleado5 = new Empleado(&quot;05&quot;, &quot;Pedro Gomez&quot;, &quot;Diseniador&quot;, 1900, &quot;02/05/1992&quot;);</span>
+<span class="nc" id="L21">        String fechaInicio = &quot;01/01/1990&quot;;</span>
+<span class="nc" id="L22">        String fechaFinal = &quot;31/12/2000&quot;;</span>
 
-<span class="nc" id="L13">    }    </span>
+<span class="nc" id="L24">        fileOperations.create(empleado1);</span>
+<span class="nc" id="L25">        fileOperations.create(empleado2);</span>
+<span class="nc" id="L26">        fileOperations.create(empleado3);</span>
+<span class="nc" id="L27">        fileOperations.create(empleado4);</span>
+<span class="nc" id="L28">        fileOperations.create(empleado5);</span>
+<span class="nc" id="L29">        System.out.println(fileOperations);</span>
+
+<span class="nc" id="L31">        System.out.println(&quot;Empleado leído (01): &quot; +fileOperations.read(&quot;01&quot;));</span>
+<span class="nc" id="L32">        System.out.println(&quot;Empleado leído (emp3): &quot; +fileOperations.read(empleado3));</span>
+
+<span class="nc" id="L34">        Empleado empleadoActualizado = new Empleado(&quot;05&quot;, &quot;Pedro Gomez&quot;, &quot;Desarollador&quot;, 2500, &quot;02/05/1992&quot;);</span>
+<span class="nc" id="L35">        fileOperations.update(empleadoActualizado);</span>
+<span class="nc" id="L36">        System.out.println(&quot;Empleado actualizado (05): &quot; +fileOperations.read(&quot;05&quot;));</span>
+
+<span class="nc" id="L38">        fileOperations.delete(&quot;04&quot;);</span>
+<span class="nc" id="L39">        System.out.println(&quot;Intentando leer empleado eliminado (04): &quot; +fileOperations.read(&quot;04&quot;));</span>
+
+<span class="nc" id="L41">        Set&lt;Empleado&gt; desarrolladores = fileOperations.empleadosPorPuesto(&quot;Desarrollador&quot;);</span>
+<span class="nc" id="L42">        System.out.println(&quot;Empleados en el puesto de Desarrollador: &quot; +desarrolladores);</span>
+
+<span class="nc" id="L44">        Set&lt;Empleado&gt; empleadosPorEdad = fileOperations.empleadosPorEdad(fechaInicio, fechaFinal);</span>
+<span class="nc" id="L45">        System.out.println(&quot;Empleados nacidos entre &quot; +fechaInicio + &quot; y &quot; +fechaFinal + &quot;: &quot; +empleadosPorEdad);</span>
+<span class="nc" id="L46">    }    </span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
