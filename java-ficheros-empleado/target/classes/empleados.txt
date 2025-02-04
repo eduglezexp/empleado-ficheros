@@ -1,9 +1,4 @@
-11223, Carlos, Designer, 2800.0, 25/07/1995
-44556, Marta, Manager, 3200.0, 05/12/1985
-67890, Ana, Senior Developer, 2500.0, 15/03/1990
 01, Juan Perez, Desarrollador, 2000.0, 06/09/2001
-02, Maria Lopez, Diseñador, 1800.0, 15/03/1995
+02, Maria Lopez, Diseniador, 1800.0, 15/03/1995
 03, Carlos Gomez, Desarrollador, 2200.0, 21/07/1988
-05, Pedro Gomez, Desarrollador, 2500.0, 02/05/1992
-04, Laura Martinez, Gerente, 3000.0, 10/12/1980
-12345, Juan, Manager, 3000.0, 10/05/1980
+05, Pedro Gomez, Desarollador, 2500.0, 02/05/1992
