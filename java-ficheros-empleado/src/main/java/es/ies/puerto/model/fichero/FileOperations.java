@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import es.ies.puerto.model.Empleado;
@@ -23,16 +21,16 @@ import es.ies.puerto.model.Operations;
  */
 
 public class FileOperations implements Operations {
-    File fichero;
-    String path = "/Users/eduex/OneDrive/Escritorio/1DAM/PRO/Repository/empleado-ficheros/java-ficheros-empleado/src/main/resources/empleados.txt";
+    File file;
+    String fichero = "/Users/eduex/OneDrive/Escritorio/1DAM/PRO/Repository/empleado-ficheros/java-ficheros-empleado/src/main/resources/empleados.txt";
     
     /**
      * Constructor por defecto
      */
     public FileOperations() {
-        fichero = new File(path);
-        if (!fichero.exists() || !fichero.isFile()) {
-            throw new IllegalArgumentException("El recurso no es de tipo fichero" +path);
+        file = new File(fichero);
+        if (!file.exists() || !file.isFile()) {
+            throw new IllegalArgumentException("El recurso no es de tipo fichero" +fichero);
         }
     }
 
@@ -51,7 +49,7 @@ public class FileOperations implements Operations {
         if (empleadoExistente != null) {
             return false; 
         }
-        return create(empleado.toString(), fichero);
+        return create(empleado.toString(), file);
     }
 
     /**
@@ -73,23 +71,36 @@ public class FileOperations implements Operations {
 
     /**
      * Funcion para leer a un empleado, dado un identificador
+     * @param file a leer
+     * @return lista de empleado
+     */
+    public Set<Empleado> read(File file) {
+        Set<Empleado> empleados = new HashSet<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] arrayline = line.split(",");
+                Empleado empleado = new Empleado(arrayline[0], arrayline[1], arrayline[2], Double.parseDouble(arrayline[3]), arrayline[4]);
+                empleados.add(empleado);
+            }
+        } catch (IOException e) {
+            return new HashSet<>();
+        }
+        return empleados;
+    }
+
+    /**
+     * Funcion para leer a un empleado, dado un identificador
      * @param identificador del empleado
      * @return empleado
      */
     @Override
     public Empleado read(String identificador) {
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(", ");
-                if (data[0].equals(identificador)) {
-                    return new Empleado(data[0], data[1], data[2], Double.parseDouble(data[3]), data[4]);
-                }
-            }
-        } catch (IOException exception) {
-            exception.printStackTrace();
+        if (identificador == null || identificador.isEmpty()) {
+            return null;
         }
-        return null;
+        Empleado empleado = new Empleado(identificador);
+        return read(empleado);
     }
 
     /**
@@ -99,7 +110,18 @@ public class FileOperations implements Operations {
      */
     @Override
     public Empleado read(Empleado empleado) {
-        return read(empleado.getIdentificador());
+        if (empleado == null || empleado.getIdentificador() == null) {
+            return empleado;
+        }
+        Set<Empleado> empleados = read(file);
+        if (empleados.contains(empleado)) {
+            for (Empleado personaBuscar : empleados) {
+                if (personaBuscar.equals(empleado)) {
+                    return personaBuscar;
+                }
+            }
+        }
+        return empleado;
     }
     
     /**
@@ -109,9 +131,9 @@ public class FileOperations implements Operations {
      */
     @Override
     public boolean update(Empleado empleado) {
-        List<Empleado> empleados = getAllEmpleados();
+        Set<Empleado> empleados = getAllEmpleados();
         boolean updated = false;
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fichero))) {
             for (Empleado empleadoBuscar : empleados) {
                 if (empleadoBuscar.getIdentificador().equals(empleado.getIdentificador())) {
                     bw.write(empleado.toString());
@@ -135,9 +157,9 @@ public class FileOperations implements Operations {
      */
     @Override
     public boolean delete(String identificador) {
-        List<Empleado> empleados = getAllEmpleados();
+        Set<Empleado> empleados = getAllEmpleados();
         boolean deleted = empleados.removeIf(e -> e.getIdentificador().equals(identificador));
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fichero))) {
             for (Empleado empleado : empleados) {
                 bw.write(empleado.toString());
                 bw.newLine();
@@ -153,9 +175,9 @@ public class FileOperations implements Operations {
      * Funcion para obtener todos los empleados 
      * @return lsita de empleados
      */
-    private List<Empleado> getAllEmpleados() {
-        List<Empleado> empleados = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+    private Set<Empleado> getAllEmpleados() {
+        Set<Empleado> empleados = new HashSet<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(", ");

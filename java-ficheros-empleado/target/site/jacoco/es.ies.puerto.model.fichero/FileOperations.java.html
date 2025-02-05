@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import es.ies.puerto.model.Empleado;
@@ -24,17 +22,17 @@ import es.ies.puerto.model.Operations;
 
 public class FileOperations implements Operations {
     File fichero;
-<span class="fc" id="L27">    String path = &quot;/Users/eduex/OneDrive/Escritorio/1DAM/PRO/Repository/empleado-ficheros/java-ficheros-empleado/src/main/resources/empleados.txt&quot;;</span>
+<span class="fc" id="L25">    String path = &quot;/Users/eduex/OneDrive/Escritorio/1DAM/PRO/Repository/empleado-ficheros/java-ficheros-empleado/src/main/resources/empleados.txt&quot;;</span>
     
     /**
      * Constructor por defecto
      */
-<span class="fc" id="L32">    public FileOperations() {</span>
-<span class="fc" id="L33">        fichero = new File(path);</span>
-<span class="pc bpc" id="L34" title="2 of 4 branches missed.">        if (!fichero.exists() || !fichero.isFile()) {</span>
-<span class="nc" id="L35">            throw new IllegalArgumentException(&quot;El recurso no es de tipo fichero&quot; +path);</span>
+<span class="fc" id="L30">    public FileOperations() {</span>
+<span class="fc" id="L31">        fichero = new File(path);</span>
+<span class="pc bpc" id="L32" title="2 of 4 branches missed.">        if (!fichero.exists() || !fichero.isFile()) {</span>
+<span class="nc" id="L33">            throw new IllegalArgumentException(&quot;El recurso no es de tipo fichero&quot; +path);</span>
         }
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L35">    }</span>
 
     /**
      * Funcion para crear un nuevo empleado
@@ -43,15 +41,15 @@ public class FileOperations implements Operations {
      */
     @Override
     public boolean create(Empleado empleado) {
-<span class="pc bpc" id="L46" title="2 of 4 branches missed.">        if (empleado == null || empleado.getIdentificador() == null) {</span>
-<span class="nc" id="L47">            return false;</span>
+<span class="pc bpc" id="L44" title="2 of 4 branches missed.">        if (empleado == null || empleado.getIdentificador() == null) {</span>
+<span class="nc" id="L45">            return false;</span>
         }
-<span class="fc" id="L49">        String identificador = empleado.getIdentificador();</span>
-<span class="fc" id="L50">        Empleado empleadoExistente = read(identificador);</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (empleadoExistente != null) {</span>
-<span class="fc" id="L52">            return false; </span>
+<span class="fc" id="L47">        String identificador = empleado.getIdentificador();</span>
+<span class="fc" id="L48">        Empleado empleadoExistente = read(identificador);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (empleadoExistente != null) {</span>
+<span class="fc" id="L50">            return false; </span>
         }
-<span class="fc" id="L54">        return create(empleado.toString(), fichero);</span>
+<span class="fc" id="L52">        return create(empleado.toString(), fichero);</span>
     }
 
     /**
@@ -61,13 +59,13 @@ public class FileOperations implements Operations {
      * @return true/false
      */
     private boolean create(String data,File file) {
-<span class="fc" id="L64">        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {</span>
-<span class="fc" id="L65">            writer.write(data);</span>
-<span class="fc" id="L66">            writer.newLine();</span>
-<span class="fc" id="L67">            return true;</span>
-<span class="nc" id="L68">        } catch (IOException exception) {</span>
-<span class="nc" id="L69">            exception.printStackTrace();</span>
-<span class="nc" id="L70">            return false;</span>
+<span class="fc" id="L62">        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {</span>
+<span class="fc" id="L63">            writer.write(data);</span>
+<span class="fc" id="L64">            writer.newLine();</span>
+<span class="fc" id="L65">            return true;</span>
+<span class="nc" id="L66">        } catch (IOException exception) {</span>
+<span class="nc" id="L67">            exception.printStackTrace();</span>
+<span class="nc" id="L68">            return false;</span>
         }
     }
 
@@ -78,18 +76,18 @@ public class FileOperations implements Operations {
      */
     @Override
     public Empleado read(String identificador) {
-<span class="fc" id="L81">        try (BufferedReader br = new BufferedReader(new FileReader(path))) {</span>
+<span class="fc" id="L79">        try (BufferedReader br = new BufferedReader(new FileReader(path))) {</span>
             String line;
-<span class="fc bfc" id="L83" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
-<span class="fc" id="L84">                String[] data = line.split(&quot;, &quot;);</span>
-<span class="fc bfc" id="L85" title="All 2 branches covered.">                if (data[0].equals(identificador)) {</span>
-<span class="fc" id="L86">                    return new Empleado(data[0], data[1], data[2], Double.parseDouble(data[3]), data[4]);</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L82">                String[] data = line.split(&quot;, &quot;);</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">                if (data[0].equals(identificador)) {</span>
+<span class="fc" id="L84">                    return new Empleado(data[0], data[1], data[2], Double.parseDouble(data[3]), data[4]);</span>
                 }
-<span class="fc" id="L88">            }</span>
-<span class="pc" id="L89">        } catch (IOException exception) {</span>
-<span class="nc" id="L90">            exception.printStackTrace();</span>
-<span class="fc" id="L91">        }</span>
-<span class="fc" id="L92">        return null;</span>
+<span class="fc" id="L86">            }</span>
+<span class="pc" id="L87">        } catch (IOException exception) {</span>
+<span class="nc" id="L88">            exception.printStackTrace();</span>
+<span class="fc" id="L89">        }</span>
+<span class="fc" id="L90">        return null;</span>
     }
 
     /**
@@ -99,7 +97,7 @@ public class FileOperations implements Operations {
      */
     @Override
     public Empleado read(Empleado empleado) {
-<span class="fc" id="L102">        return read(empleado.getIdentificador());</span>
+<span class="nc" id="L100">        return read(empleado.getIdentificador());</span>
     }
     
     /**
@@ -109,23 +107,23 @@ public class FileOperations implements Operations {
      */
     @Override
     public boolean update(Empleado empleado) {
-<span class="fc" id="L112">        List&lt;Empleado&gt; empleados = getAllEmpleados();</span>
-<span class="fc" id="L113">        boolean updated = false;</span>
-<span class="fc" id="L114">        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {</span>
-<span class="fc bfc" id="L115" title="All 2 branches covered.">            for (Empleado empleadoBuscar : empleados) {</span>
-<span class="fc bfc" id="L116" title="All 2 branches covered.">                if (empleadoBuscar.getIdentificador().equals(empleado.getIdentificador())) {</span>
-<span class="fc" id="L117">                    bw.write(empleado.toString());</span>
-<span class="fc" id="L118">                    updated = true;</span>
+<span class="fc" id="L110">        Set&lt;Empleado&gt; empleados = getAllEmpleados();</span>
+<span class="fc" id="L111">        boolean updated = false;</span>
+<span class="fc" id="L112">        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            for (Empleado empleadoBuscar : empleados) {</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">                if (empleadoBuscar.getIdentificador().equals(empleado.getIdentificador())) {</span>
+<span class="fc" id="L115">                    bw.write(empleado.toString());</span>
+<span class="fc" id="L116">                    updated = true;</span>
                 } else {
-<span class="fc" id="L120">                    bw.write(empleadoBuscar.toString());</span>
+<span class="fc" id="L118">                    bw.write(empleadoBuscar.toString());</span>
                 }
-<span class="fc" id="L122">                bw.newLine();</span>
-<span class="fc" id="L123">            }</span>
-<span class="nc" id="L124">        } catch (IOException exception) {</span>
-<span class="nc" id="L125">            exception.printStackTrace();</span>
-<span class="nc" id="L126">            return false;</span>
-<span class="fc" id="L127">        }</span>
-<span class="fc" id="L128">        return updated;</span>
+<span class="fc" id="L120">                bw.newLine();</span>
+<span class="fc" id="L121">            }</span>
+<span class="nc" id="L122">        } catch (IOException exception) {</span>
+<span class="nc" id="L123">            exception.printStackTrace();</span>
+<span class="nc" id="L124">            return false;</span>
+<span class="fc" id="L125">        }</span>
+<span class="fc" id="L126">        return updated;</span>
     }
 
     /**
@@ -135,36 +133,36 @@ public class FileOperations implements Operations {
      */
     @Override
     public boolean delete(String identificador) {
-<span class="fc" id="L138">        List&lt;Empleado&gt; empleados = getAllEmpleados();</span>
-<span class="fc" id="L139">        boolean deleted = empleados.removeIf(e -&gt; e.getIdentificador().equals(identificador));</span>
-<span class="fc" id="L140">        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {</span>
-<span class="fc bfc" id="L141" title="All 2 branches covered.">            for (Empleado empleado : empleados) {</span>
-<span class="fc" id="L142">                bw.write(empleado.toString());</span>
-<span class="fc" id="L143">                bw.newLine();</span>
-<span class="fc" id="L144">            }</span>
-<span class="nc" id="L145">        } catch (IOException exception) {</span>
-<span class="nc" id="L146">            exception.printStackTrace();</span>
-<span class="nc" id="L147">            return false;</span>
-<span class="fc" id="L148">        }</span>
-<span class="fc" id="L149">        return deleted;</span>
+<span class="fc" id="L136">        Set&lt;Empleado&gt; empleados = getAllEmpleados();</span>
+<span class="fc" id="L137">        boolean deleted = empleados.removeIf(e -&gt; e.getIdentificador().equals(identificador));</span>
+<span class="fc" id="L138">        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">            for (Empleado empleado : empleados) {</span>
+<span class="fc" id="L140">                bw.write(empleado.toString());</span>
+<span class="fc" id="L141">                bw.newLine();</span>
+<span class="fc" id="L142">            }</span>
+<span class="nc" id="L143">        } catch (IOException exception) {</span>
+<span class="nc" id="L144">            exception.printStackTrace();</span>
+<span class="nc" id="L145">            return false;</span>
+<span class="fc" id="L146">        }</span>
+<span class="fc" id="L147">        return deleted;</span>
     }
 
     /**
      * Funcion para obtener todos los empleados 
      * @return lsita de empleados
      */
-    private List&lt;Empleado&gt; getAllEmpleados() {
-<span class="fc" id="L157">        List&lt;Empleado&gt; empleados = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L158">        try (BufferedReader br = new BufferedReader(new FileReader(path))) {</span>
+    private Set&lt;Empleado&gt; getAllEmpleados() {
+<span class="fc" id="L155">        Set&lt;Empleado&gt; empleados = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L156">        try (BufferedReader br = new BufferedReader(new FileReader(path))) {</span>
             String line;
-<span class="fc bfc" id="L160" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
-<span class="fc" id="L161">                String[] data = line.split(&quot;, &quot;);</span>
-<span class="fc" id="L162">                empleados.add(new Empleado(data[0], data[1], data[2], Double.parseDouble(data[3]), data[4]));</span>
-<span class="fc" id="L163">            }</span>
-<span class="nc" id="L164">        } catch (IOException exception) {</span>
-<span class="nc" id="L165">            exception.printStackTrace();</span>
-<span class="fc" id="L166">        }</span>
-<span class="fc" id="L167">        return empleados;</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">            while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L159">                String[] data = line.split(&quot;, &quot;);</span>
+<span class="fc" id="L160">                empleados.add(new Empleado(data[0], data[1], data[2], Double.parseDouble(data[3]), data[4]));</span>
+<span class="fc" id="L161">            }</span>
+<span class="nc" id="L162">        } catch (IOException exception) {</span>
+<span class="nc" id="L163">            exception.printStackTrace();</span>
+<span class="fc" id="L164">        }</span>
+<span class="fc" id="L165">        return empleados;</span>
     }
 
     /**
@@ -174,13 +172,13 @@ public class FileOperations implements Operations {
      */
     @Override
     public Set&lt;Empleado&gt; empleadosPorPuesto(String puesto) {
-<span class="fc" id="L177">        Set&lt;Empleado&gt; empleadosFiltrados = new HashSet&lt;&gt;();</span>
-<span class="fc bfc" id="L178" title="All 2 branches covered.">        for (Empleado empleado : getAllEmpleados()) {</span>
-<span class="fc bfc" id="L179" title="All 2 branches covered.">            if (empleado.getPuesto().equalsIgnoreCase(puesto)) {</span>
-<span class="fc" id="L180">                empleadosFiltrados.add(empleado);</span>
+<span class="fc" id="L175">        Set&lt;Empleado&gt; empleadosFiltrados = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        for (Empleado empleado : getAllEmpleados()) {</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">            if (empleado.getPuesto().equalsIgnoreCase(puesto)) {</span>
+<span class="fc" id="L178">                empleadosFiltrados.add(empleado);</span>
             }
-<span class="fc" id="L182">        }</span>
-<span class="fc" id="L183">        return empleadosFiltrados;</span>
+<span class="fc" id="L180">        }</span>
+<span class="fc" id="L181">        return empleadosFiltrados;</span>
     }
 
     /**
@@ -191,23 +189,23 @@ public class FileOperations implements Operations {
      */
     @Override
     public Set&lt;Empleado&gt; empleadosPorEdad(String fechaInicio, String fechaFin) {
-<span class="fc" id="L194">        Set&lt;Empleado&gt; empleadosFiltrados = new HashSet&lt;&gt;();</span>
-<span class="fc" id="L195">    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L192">        Set&lt;Empleado&gt; empleadosFiltrados = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L193">    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
     try {
-<span class="fc" id="L197">        LocalDate inicio = LocalDate.parse(fechaInicio, formatter);</span>
-<span class="fc" id="L198">        LocalDate fin = LocalDate.parse(fechaFin, formatter);</span>
+<span class="fc" id="L195">        LocalDate inicio = LocalDate.parse(fechaInicio, formatter);</span>
+<span class="fc" id="L196">        LocalDate fin = LocalDate.parse(fechaFin, formatter);</span>
         
-<span class="fc bfc" id="L200" title="All 2 branches covered.">        for (Empleado empleado : getAllEmpleados()) {</span>
-<span class="fc" id="L201">            LocalDate fechaNacimiento = LocalDate.parse(empleado.getFechaNacimiento(), formatter);</span>
-<span class="pc bpc" id="L202" title="1 of 4 branches missed.">            if ((fechaNacimiento.isEqual(inicio) || fechaNacimiento.isAfter(inicio)) &amp;&amp;</span>
-<span class="pc bpc" id="L203" title="1 of 4 branches missed.">                (fechaNacimiento.isEqual(fin) || fechaNacimiento.isBefore(fin))) {</span>
-<span class="fc" id="L204">                empleadosFiltrados.add(empleado);</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        for (Empleado empleado : getAllEmpleados()) {</span>
+<span class="fc" id="L199">            LocalDate fechaNacimiento = LocalDate.parse(empleado.getFechaNacimiento(), formatter);</span>
+<span class="pc bpc" id="L200" title="1 of 4 branches missed.">            if ((fechaNacimiento.isEqual(inicio) || fechaNacimiento.isAfter(inicio)) &amp;&amp;</span>
+<span class="pc bpc" id="L201" title="1 of 4 branches missed.">                (fechaNacimiento.isEqual(fin) || fechaNacimiento.isBefore(fin))) {</span>
+<span class="fc" id="L202">                empleadosFiltrados.add(empleado);</span>
             }
-<span class="fc" id="L206">        }</span>
-<span class="nc" id="L207">    } catch (DateTimeParseException exception) {</span>
-<span class="nc" id="L208">        exception.printStackTrace();</span>
-<span class="fc" id="L209">    }</span>
-<span class="fc" id="L210">    return empleadosFiltrados;</span>
+<span class="fc" id="L204">        }</span>
+<span class="nc" id="L205">    } catch (DateTimeParseException exception) {</span>
+<span class="nc" id="L206">        exception.printStackTrace();</span>
+<span class="fc" id="L207">    }</span>
+<span class="fc" id="L208">        return empleadosFiltrados;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
