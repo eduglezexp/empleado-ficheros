@@ -10,25 +10,25 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
+import java.util.TreeMap;
 
 import es.ies.puerto.model.Empleado;
-import es.ies.puerto.model.Operations;
+import es.ies.puerto.model.interfaces.OperationsMap;
 
 /**
  * @author eduglezexp
  * @version 1.0.0
  */
 
-public class FileOperations implements Operations {
+public class FileOperationsMap implements OperationsMap {
     private File file;
     private String rutaAbsoluta; 
 
     /**
      * Constructor por defecto
      */
-    public FileOperations() {
+    public FileOperationsMap() {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resourceUrl = classLoader.getResource("empleados.txt");
         if (resourceUrl == null) {
@@ -51,8 +51,8 @@ public class FileOperations implements Operations {
         if (empleado == null || empleado.getIdentificador() == null) {
             return false;
         }
-        Set<Empleado> empleados = read(file);
-        if (empleados.contains(empleado)) {
+        Map<String, Empleado> empleados = read(file);
+        if (empleados.containsKey(empleado.getIdentificador())) {
             return false;
         }
         return create(empleado.toString(), file);
@@ -64,7 +64,7 @@ public class FileOperations implements Operations {
      * @param file fichero
      * @return true/false
      */
-    private boolean create(String data,File file) {
+    private boolean create(String data, File file) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(data);
             writer.newLine();
@@ -78,19 +78,19 @@ public class FileOperations implements Operations {
     /**
      * Funcion para leer a un empleado, dado un identificador
      * @param file a leer
-     * @return lista de empleado
+     * @return mapa de empleados
      */
-    public Set<Empleado> read(File file) {
-        Set<Empleado> empleados = new HashSet<>();
+    public Map<String, Empleado> read(File file) {
+        Map<String, Empleado> empleados = new TreeMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] arrayline = line.split(",");
                 Empleado empleado = new Empleado(arrayline[0], arrayline[1], arrayline[2], Double.parseDouble(arrayline[3]), arrayline[4]);
-                empleados.add(empleado);
+                empleados.put(empleado.getIdentificador(), empleado);
             }
         } catch (IOException e) {
-            return new HashSet<>();
+            return new TreeMap<>();
         }
         return empleados;
     }
@@ -105,8 +105,8 @@ public class FileOperations implements Operations {
         if (identificador == null || identificador.isEmpty()) {
             return null;
         }
-        Empleado empleado = new Empleado(identificador);
-        return read(empleado);
+        Map<String, Empleado> empleados = read(file);
+        return empleados.get(identificador);
     }
 
     /**
@@ -119,15 +119,8 @@ public class FileOperations implements Operations {
         if (empleado == null || empleado.getIdentificador() == null) {
             return empleado;
         }
-        Set<Empleado> empleados = read(file);
-        if (empleados.contains(empleado)) {
-            for (Empleado personaBuscar : empleados) {
-                if (personaBuscar.equals(empleado)) {
-                    return personaBuscar;
-                }
-            }
-        }
-        return empleado;
+        Map<String, Empleado> empleados = read(file);
+        return empleados.get(empleado.getIdentificador());
     }
     
     /**
@@ -137,23 +130,21 @@ public class FileOperations implements Operations {
      */
     @Override
     public boolean update(Empleado empleado) {
-        Set<Empleado> empleados = getAllEmpleados();
-        boolean updated = false;
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))) {
-            for (Empleado empleadoBuscar : empleados) {
-                if (empleadoBuscar.getIdentificador().equals(empleado.getIdentificador())) {
-                    bw.write(empleado.toString());
-                    updated = true;
-                } else {
-                    bw.write(empleadoBuscar.toString());
+        Map<String, Empleado> empleados = getAllEmpleados();
+        if (empleados.containsKey(empleado.getIdentificador())) {
+            empleados.put(empleado.getIdentificador(), empleado);
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))) {
+                for (Empleado emp : empleados.values()) {
+                    bw.write(emp.toString());
+                    bw.newLine();
                 }
-                bw.newLine();
+                return true;
+            } catch (IOException exception) {
+                exception.printStackTrace();
+                return false;
             }
-        } catch (IOException exception) {
-            exception.printStackTrace();
-            return false;
         }
-        return updated;
+        return false;
     }
 
     /**
@@ -163,31 +154,34 @@ public class FileOperations implements Operations {
      */
     @Override
     public boolean delete(String identificador) {
-        Set<Empleado> empleados = getAllEmpleados();
-        boolean deleted = empleados.removeIf(e -> e.getIdentificador().equals(identificador));
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))) {
-            for (Empleado empleado : empleados) {
-                bw.write(empleado.toString());
-                bw.newLine();
+        Map<String, Empleado> empleados = getAllEmpleados();
+        if (empleados.remove(identificador) != null) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))) {
+                for (Empleado empleado : empleados.values()) {
+                    bw.write(empleado.toString());
+                    bw.newLine();
+                }
+                return true;
+            } catch (IOException exception) {
+                exception.printStackTrace();
+                return false;
             }
-        } catch (IOException exception) {
-            exception.printStackTrace();
-            return false;
         }
-        return deleted;
+        return false;
     }
 
     /**
      * Funcion para obtener todos los empleados 
-     * @return lsita de empleados
+     * @return mapa de empleados
      */
-    private Set<Empleado> getAllEmpleados() {
-        Set<Empleado> empleados = new HashSet<>();
+    private Map<String, Empleado> getAllEmpleados() {
+        Map<String, Empleado> empleados = new TreeMap<>();
         try (BufferedReader br = new BufferedReader(new FileReader(rutaAbsoluta))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(", ");
-                empleados.add(new Empleado(data[0], data[1], data[2], Double.parseDouble(data[3]), data[4]));
+                Empleado empleado = new Empleado(data[0], data[1], data[2], Double.parseDouble(data[3]), data[4]);
+                empleados.put(empleado.getIdentificador(), empleado);
             }
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -201,11 +195,11 @@ public class FileOperations implements Operations {
      * @return lista de empleados de un puesto concreto
      */
     @Override
-    public Set<Empleado> empleadosPorPuesto(String puesto) {
-        Set<Empleado> empleadosFiltrados = new HashSet<>();
-        for (Empleado empleado : getAllEmpleados()) {
+    public Map<String, Empleado> empleadosPorPuesto(String puesto) {
+        Map<String, Empleado> empleadosFiltrados = new TreeMap<>();
+        for (Empleado empleado : getAllEmpleados().values()) {
             if (empleado.getPuesto().equalsIgnoreCase(puesto)) {
-                empleadosFiltrados.add(empleado);
+                empleadosFiltrados.put(empleado.getIdentificador(), empleado);
             }
         }
         return empleadosFiltrados;
@@ -218,23 +212,23 @@ public class FileOperations implements Operations {
      * @return lista de empleados entre dos fechas concretas
      */
     @Override
-    public Set<Empleado> empleadosPorEdad(String fechaInicio, String fechaFin) {
-        Set<Empleado> empleadosFiltrados = new HashSet<>();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    try {
-        LocalDate inicio = LocalDate.parse(fechaInicio, formatter);
-        LocalDate fin = LocalDate.parse(fechaFin, formatter);
-        
-        for (Empleado empleado : getAllEmpleados()) {
-            LocalDate fechaNacimiento = LocalDate.parse(empleado.getFechaNacimiento(), formatter);
-            if ((fechaNacimiento.isEqual(inicio) || fechaNacimiento.isAfter(inicio)) &&
-                (fechaNacimiento.isEqual(fin) || fechaNacimiento.isBefore(fin))) {
-                empleadosFiltrados.add(empleado);
+    public Map<String, Empleado> empleadosPorEdad(String fechaInicio, String fechaFin) {
+        Map<String, Empleado> empleadosFiltrados = new TreeMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            LocalDate inicio = LocalDate.parse(fechaInicio, formatter);
+            LocalDate fin = LocalDate.parse(fechaFin, formatter);
+            
+            for (Empleado empleado : getAllEmpleados().values()) {
+                LocalDate fechaNacimiento = LocalDate.parse(empleado.getFechaNacimiento(), formatter);
+                if ((fechaNacimiento.isEqual(inicio) || fechaNacimiento.isAfter(inicio)) &&
+                    (fechaNacimiento.isEqual(fin) || fechaNacimiento.isBefore(fin))) {
+                    empleadosFiltrados.put(empleado.getIdentificador(), empleado);
+                }
             }
+        } catch (DateTimeParseException exception) {
+            exception.printStackTrace();
         }
-    } catch (DateTimeParseException exception) {
-        exception.printStackTrace();
-    }
         return empleadosFiltrados;
     }
 }

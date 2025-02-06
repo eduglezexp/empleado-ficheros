@@ -1,9 +1,11 @@
 package es.ies.puerto;
 
+import java.util.Map;
 import java.util.Set;
 
 import es.ies.puerto.model.Empleado;
-import es.ies.puerto.model.fichero.FileOperations;
+import es.ies.puerto.model.fichero.FileOperationsSet;
+import es.ies.puerto.model.fichero.FileOperationsMap;
 
 /**
  * @author eduglezexp
@@ -12,7 +14,8 @@ import es.ies.puerto.model.fichero.FileOperations;
 
 public class EjemploFile {
     public static void main(String[] args) {
-        FileOperations fileOperations = new FileOperations();
+        //FileOperationsSet fileOperations = new FileOperationsSet();
+        FileOperationsMap fileOperations = new FileOperationsMap();
         Empleado empleado1 = new Empleado("01", "Juan Perez", "Desarrollador", 2000, "06/09/2001");
         Empleado empleado2 = new Empleado("02", "Maria Lopez", "Diseniador", 1800, "15/03/1995");
         Empleado empleado3 = new Empleado("03", "Carlos Gomez", "Desarrollador", 2200, "21/07/1988");
@@ -37,11 +40,17 @@ public class EjemploFile {
 
         fileOperations.delete("04");
         System.out.println("Intentando leer empleado eliminado (04): " +fileOperations.read("04"));
+        
+        //Set<Empleado> desarrolladores = fileOperations.empleadosPorPuesto("Desarrollador");
+        //System.out.println("Empleados en el puesto de Desarrollador: " +desarrolladores);
 
-        Set<Empleado> desarrolladores = fileOperations.empleadosPorPuesto("Desarrollador");
-        System.out.println("Empleados en el puesto de Desarrollador: " +desarrolladores);
+        //Set<Empleado> empleadosPorEdad = fileOperations.empleadosPorEdad(fechaInicio, fechaFinal);
+        //System.out.println("Empleados nacidos entre " +fechaInicio + " y " +fechaFinal + ": " +empleadosPorEdad);
 
-        Set<Empleado> empleadosPorEdad = fileOperations.empleadosPorEdad(fechaInicio, fechaFinal);
-        System.out.println("Empleados nacidos entre " +fechaInicio + " y " +fechaFinal + ": " +empleadosPorEdad);
+        Map<String, Empleado> desarrolladoresMap = fileOperations.empleadosPorPuesto("Desarrollador");
+        System.out.println("Empleados en el puesto de Desarrollador: " +desarrolladoresMap);
+
+        Map<String, Empleado> empleadosPorEdadMap = fileOperations.empleadosPorEdad(fechaInicio, fechaFinal);
+        System.out.println("Empleados nacidos entre " +fechaInicio + " y " +fechaFinal + ": " +empleadosPorEdadMap);
     }    
 }

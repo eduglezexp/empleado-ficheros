@@ -1,13 +1,9 @@
-package es.ies.puerto.model;
+package es.ies.puerto.model.interfaces;
 
-import java.util.Set;
+import es.ies.puerto.model.Empleado;
+import java.util.Map;
 
-/**
- * @author eduglezexp
- * @version 1.0.0
- */
-
-public interface Operations {
+public interface OperationsMap {
     /**
      * Funcion para crear un nuevo empleado
      * @param empleado a crear
@@ -43,12 +39,12 @@ public interface Operations {
      * @param puesto al cual se obtendra la lista
      * @return lista de empleados de un puesto concreto
      */
-    Set<Empleado> empleadosPorPuesto(String puesto);
+    Map<String, Empleado> empleadosPorPuesto(String puesto);
     /**
      * Funcion que obtiene un listado de empleados entre dos fechas
      * @param fechaInicio fecha de inicio 
      * @param fechaFin fecha del final
      * @return lista de empleados entre dos fechas concretas
      */
-    Set<Empleado> empleadosPorEdad(String fechaInicio, String fechaFin);
+    Map<String, Empleado> empleadosPorEdad(String fechaInicio, String fechaFin);
 }
