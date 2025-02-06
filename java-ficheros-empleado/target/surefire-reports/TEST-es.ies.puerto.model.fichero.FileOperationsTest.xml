@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="es.ies.puerto.model.fichero.FileOperationsTest" time="0.041" tests="11" errors="0" skipped="0" failures="3">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="es.ies.puerto.model.fichero.FileOperationsTest" time="0.041" tests="11" errors="0" skipped="0" failures="8">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="C:\Users\eduex\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.9.9-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\eduex\AppData\Local\Temp\surefire3133592307284065786\surefirebooter-20250205210843528_3.jar C:\Users\eduex\AppData\Local\Temp\surefire3133592307284065786 2025-02-05T21-08-43_419-jvmRun1 surefire-20250205210843528_1tmp surefire_0-20250205210843528_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\eduex\AppData\Local\Temp\surefire2843834825880318738\surefirebooter-20250206184406911_3.jar C:\Users\eduex\AppData\Local\Temp\surefire2843834825880318738 2025-02-06T18-44-06_804-jvmRun1 surefire-20250206184406911_1tmp surefire_0-20250206184406911_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\eduex\OneDrive\Escritorio\1DAM\PRO\Repository\empleado-ficheros\java-ficheros-empleado\target\test-classes;C:\Users\eduex\OneDrive\Escritorio\1DAM\PRO\Repository\empleado-ficheros\java-ficheros-empleado\target\classes;C:\Users\eduex\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\eduex\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\eduex\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\eduex\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\eduex\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\eduex\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;C:\Users\eduex\.m2\repository\org\mockito\mockito-core\5.4.0\mockito-core-5.4.0.jar;C:\Users\eduex\.m2\repository\net\bytebuddy\byte-buddy\1.14.5\byte-buddy-1.14.5.jar;C:\Users\eduex\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.5\byte-buddy-agent-1.14.5.jar;C:\Users\eduex\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\eduex\.m2\repository\org\mockito\mockito-junit-jupiter\5.4.0\mockito-junit-jupiter-5.4.0.jar;C:\Users\eduex\.m2\repository\org\simpleframework\simple-xml\2.7.1\simple-xml-2.7.1.jar;C:\Users\eduex\.m2\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar;C:\Users\eduex\.m2\repository\stax\stax\1.2.0\stax-1.2.0.jar;C:\Users\eduex\.m2\repository\xpp3\xpp3\1.1.3.3\xpp3-1.1.3.3.jar;C:\Users\eduex\.m2\repository\com\google\code\gson\gson\2.8.9\gson-2.8.9.jar;C:\Users\eduex\.m2\repository\org\xerial\sqlite-jdbc\3.45.2.0\sqlite-jdbc-3.45.2.0.jar;C:\Users\eduex\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\eduex\AppData\Local\Temp\surefire3133592307284065786\surefirebooter-20250205210843528_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\eduex\AppData\Local\Temp\surefire2843834825880318738\surefirebooter-20250206184406911_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.9+9"/>
@@ -57,7 +57,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testEmpleadosPorEdad" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.009">
+  <testcase name="testEmpleadosPorEdad" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.007">
     <failure message="El empleado Carlos debería estar en el rango de edades. ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: El empleado Carlos debería estar en el rango de edades. ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -70,10 +70,22 @@
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 ]]></failure>
   </testcase>
-  <testcase name="testEmpleadosPorPuestoNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.001"/>
-  <testcase name="testUpdateEmpleadoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.003"/>
-  <testcase name="testDeleteEmpleadoNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.002"/>
-  <testcase name="testEmpleadosPorEdadNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.001">
+  <testcase name="testEmpleadosPorPuestoNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.002"/>
+  <testcase name="testUpdateEmpleadoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.004">
+    <failure message="El puesto debería haberse actualizado. ==&gt; expected: &lt;Senior Manager&gt; but was: &lt; Senior Manager&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: El puesto debería haberse actualizado. ==> expected: <Senior Manager> but was: < Senior Manager>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1152)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testUpdateEmpleadoExistente(FileOperationsTest.java:55)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></failure>
+  </testcase>
+  <testcase name="testDeleteEmpleadoNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.003"/>
+  <testcase name="testEmpleadosPorEdadNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.002">
     <failure message="No deberían existir empleados en el rango de edades. ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: No deberían existir empleados en el rango de edades. ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -86,19 +98,67 @@
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 ]]></failure>
   </testcase>
-  <testcase name="testReadEmpleadoNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.001"/>
-  <testcase name="testUpdateEmpleadoNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.001"/>
-  <testcase name="testDeleteEmpleadoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.002"/>
-  <testcase name="testCreateEmpleado" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.002"/>
-  <testcase name="testReadEmpleadoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.002"/>
-  <testcase name="testEmpleadosPorPuesto" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.003">
-    <failure message="Debería haber un solo empleado con el puesto &apos;Manager&apos;. ==&gt; expected: &lt;1&gt; but was: &lt;2&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Debería haber un solo empleado con el puesto 'Manager'. ==> expected: <1> but was: <2>
+  <testcase name="testReadEmpleadoNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.002">
+    <failure message="El empleado con ese identificador no debería existir. ==&gt; expected: &lt;null&gt; but was: &lt;00000, null, null, 0.0, null&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: El empleado con ese identificador no debería existir. ==> expected: <null> but was: <00000, null, null, 0.0, null>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:559)
-	at es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorPuesto(FileOperationsTest.java:85)
+	at org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:50)
+	at org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:35)
+	at org.junit.jupiter.api.Assertions.assertNull(Assertions.java:283)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testReadEmpleadoNoExistente(FileOperationsTest.java:45)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></failure>
+  </testcase>
+  <testcase name="testUpdateEmpleadoNoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.003">
+    <failure message="No debería permitir actualizar un empleado que no existe. ==&gt; expected: &lt;false&gt; but was: &lt;true&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: No debería permitir actualizar un empleado que no existe. ==> expected: <false> but was: <true>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+	at org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+	at org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:235)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testUpdateEmpleadoNoExistente(FileOperationsTest.java:62)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></failure>
+  </testcase>
+  <testcase name="testDeleteEmpleadoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.003">
+    <failure message="El empleado ya no debería existir. ==&gt; expected: &lt;null&gt; but was: &lt;12345, null, null, 0.0, null&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: El empleado ya no debería existir. ==> expected: <null> but was: <12345, null, null, 0.0, null>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:50)
+	at org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:35)
+	at org.junit.jupiter.api.Assertions.assertNull(Assertions.java:283)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testDeleteEmpleadoExistente(FileOperationsTest.java:71)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></failure>
+  </testcase>
+  <testcase name="testCreateEmpleado" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.001">
+    <failure message="El empleado debería haberse creado correctamente. ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: El empleado debería haberse creado correctamente. ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:210)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testCreateEmpleado(FileOperationsTest.java:29)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></failure>
+  </testcase>
+  <testcase name="testReadEmpleadoExistente" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.001"/>
+  <testcase name="testEmpleadosPorPuesto" classname="es.ies.puerto.model.fichero.FileOperationsTest" time="0.002">
+    <failure message="El conjunto debería contener al empleado con el puesto &apos;Manager&apos;. ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: El conjunto debería contener al empleado con el puesto 'Manager'. ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:210)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorPuesto(FileOperationsTest.java:86)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)

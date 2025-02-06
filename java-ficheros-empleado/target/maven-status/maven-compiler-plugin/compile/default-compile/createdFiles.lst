@@ -2,3 +2,4 @@ es\ies\puerto\model\Empleado.class
 es\ies\puerto\model\Operations.class
 es\ies\puerto\EjemploFile.class
 es\ies\puerto\model\fichero\FileOperations.class
+es\ies\puerto\model\fichero\FileHashMapOperations.class

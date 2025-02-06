@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,16 +22,22 @@ import es.ies.puerto.model.Operations;
  */
 
 public class FileOperations implements Operations {
-    File file;
-    String fichero = "/Users/eduex/OneDrive/Escritorio/1DAM/PRO/Repository/empleado-ficheros/java-ficheros-empleado/src/main/resources/empleados.txt";
-    
+    private File file;
+    private String rutaAbsoluta; 
+
     /**
      * Constructor por defecto
      */
     public FileOperations() {
-        file = new File(fichero);
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resourceUrl = classLoader.getResource("empleados.txt");
+        if (resourceUrl == null) {
+            throw new IllegalArgumentException("El archivo no se encontro en el classpath: empleados.txt");
+        }
+        this.rutaAbsoluta = resourceUrl.getFile(); 
+        this.file = new File(rutaAbsoluta);
         if (!file.exists() || !file.isFile()) {
-            throw new IllegalArgumentException("El recurso no es de tipo fichero" +fichero);
+            throw new IllegalArgumentException("El recurso no es de tipo fichero: " + rutaAbsoluta);
         }
     }
 
@@ -44,10 +51,9 @@ public class FileOperations implements Operations {
         if (empleado == null || empleado.getIdentificador() == null) {
             return false;
         }
-        String identificador = empleado.getIdentificador();
-        Empleado empleadoExistente = read(identificador);
-        if (empleadoExistente != null) {
-            return false; 
+        Set<Empleado> empleados = read(file);
+        if (empleados.contains(empleado)) {
+            return false;
         }
         return create(empleado.toString(), file);
     }
@@ -133,7 +139,7 @@ public class FileOperations implements Operations {
     public boolean update(Empleado empleado) {
         Set<Empleado> empleados = getAllEmpleados();
         boolean updated = false;
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fichero))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))) {
             for (Empleado empleadoBuscar : empleados) {
                 if (empleadoBuscar.getIdentificador().equals(empleado.getIdentificador())) {
                     bw.write(empleado.toString());
@@ -159,7 +165,7 @@ public class FileOperations implements Operations {
     public boolean delete(String identificador) {
         Set<Empleado> empleados = getAllEmpleados();
         boolean deleted = empleados.removeIf(e -> e.getIdentificador().equals(identificador));
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fichero))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaAbsoluta))) {
             for (Empleado empleado : empleados) {
                 bw.write(empleado.toString());
                 bw.newLine();
@@ -177,7 +183,7 @@ public class FileOperations implements Operations {
      */
     private Set<Empleado> getAllEmpleados() {
         Set<Empleado> empleados = new HashSet<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaAbsoluta))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(", ");

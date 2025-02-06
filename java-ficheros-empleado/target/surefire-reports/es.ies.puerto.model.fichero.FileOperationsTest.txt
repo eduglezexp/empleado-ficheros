@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: es.ies.puerto.model.fichero.FileOperationsTest
 -------------------------------------------------------------------------------
-Tests run: 11, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.041 s <<< FAILURE! -- in es.ies.puerto.model.fichero.FileOperationsTest
-es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorEdad -- Time elapsed: 0.009 s <<< FAILURE!
+Tests run: 11, Failures: 8, Errors: 0, Skipped: 0, Time elapsed: 0.041 s <<< FAILURE! -- in es.ies.puerto.model.fichero.FileOperationsTest
+es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorEdad -- Time elapsed: 0.007 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: El empleado Carlos debería estar en el rango de edades. ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -14,7 +14,19 @@ org.opentest4j.AssertionFailedError: El empleado Carlos debería estar en el ran
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorEdadNoExistente -- Time elapsed: 0.001 s <<< FAILURE!
+es.ies.puerto.model.fichero.FileOperationsTest.testUpdateEmpleadoExistente -- Time elapsed: 0.004 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El puesto debería haberse actualizado. ==> expected: <Senior Manager> but was: < Senior Manager>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1152)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testUpdateEmpleadoExistente(FileOperationsTest.java:55)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorEdadNoExistente -- Time elapsed: 0.002 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: No deberían existir empleados en el rango de edades. ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -26,14 +38,62 @@ org.opentest4j.AssertionFailedError: No deberían existir empleados en el rango 
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorPuesto -- Time elapsed: 0.003 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: Debería haber un solo empleado con el puesto 'Manager'. ==> expected: <1> but was: <2>
+es.ies.puerto.model.fichero.FileOperationsTest.testReadEmpleadoNoExistente -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El empleado con ese identificador no debería existir. ==> expected: <null> but was: <00000, null, null, 0.0, null>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:559)
-	at es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorPuesto(FileOperationsTest.java:85)
+	at org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:50)
+	at org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:35)
+	at org.junit.jupiter.api.Assertions.assertNull(Assertions.java:283)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testReadEmpleadoNoExistente(FileOperationsTest.java:45)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+es.ies.puerto.model.fichero.FileOperationsTest.testUpdateEmpleadoNoExistente -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: No debería permitir actualizar un empleado que no existe. ==> expected: <false> but was: <true>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+	at org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+	at org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:235)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testUpdateEmpleadoNoExistente(FileOperationsTest.java:62)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+es.ies.puerto.model.fichero.FileOperationsTest.testDeleteEmpleadoExistente -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El empleado ya no debería existir. ==> expected: <null> but was: <12345, null, null, 0.0, null>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:50)
+	at org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:35)
+	at org.junit.jupiter.api.Assertions.assertNull(Assertions.java:283)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testDeleteEmpleadoExistente(FileOperationsTest.java:71)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+es.ies.puerto.model.fichero.FileOperationsTest.testCreateEmpleado -- Time elapsed: 0.001 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El empleado debería haberse creado correctamente. ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:210)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testCreateEmpleado(FileOperationsTest.java:29)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorPuesto -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: El conjunto debería contener al empleado con el puesto 'Manager'. ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:210)
+	at es.ies.puerto.model.fichero.FileOperationsTest.testEmpleadosPorPuesto(FileOperationsTest.java:86)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
